@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Dashboard from './Dashboard/Pages/dashboard';
+import Sidebar from './Dashboard/Pages/sidebar';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [showDashboard, setShowDashboard] = useState(true);
+
+    const handleLinkClick = () => {
+        setShowDashboard(false);
+    };
+
+    const handleDashboardClick = () => {
+        setShowDashboard(true);
+    };
+
+    return (
+        <>
+            <div>
+                <Sidebar
+                    onDashboardClick={handleDashboardClick}
+                    onLinkClick={handleLinkClick}
+                />
+                <div className="main-content">
+                    {showDashboard && <Dashboard />}
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default App;
